@@ -9,33 +9,32 @@ baterai = 'unknown'
 charging = 'unknown'
 
 //nocache
-require('./kurr.js')
-nocache('../kurr.js', module => console.log(color('[WATCH]', 'yellow'), color(`'${module}'`, 'cyan'), 'File is updated!'))
+require('./dha.js')
+nocache('../dha.js', module => console.log(color('[WATCH]', 'yellow'), color(`'${module}'`, 'cyan'), 'File is updated!'))
 require('./message/group.js')
 nocache('../message/group.js', module => console.log(color('[WATCH]', 'yellow'), color(`'${module}'`, 'yellow'), 'File is updated!'))
 
 const starts = async (dha = new WAConnection()) => {
-	kurr.logger.level = 'warn'
-	console.log(color(figlet.textSync('SHERLYNN BOTZ V2', {
+	dha.logger.level = 'warn'
+	console.log(color(figlet.textSync('HannGanzz', {
 		font: 'Standard',
 		horizontalLayout: 'default',
 		vertivalLayout: 'default',
 		width: 80,
 		whitespaceBreak: false
 	}), 'cyan'))
-	console.log(color('[SOURCE CODE INI DIJAGA DAN DI LINDUNGI OLEH KURRXD\n\n', 'orange'), color('\n======TERIMKASIH BANYAK KEPADA======\n•MHANKBARBAR\n•NINO\n•IKYADS\n•KurrXd\n•DAFFA PATNER SAYA\n•COPAS TEAM\n•PENYEDIA APIKEY\n•SELURUH CREATOR BOT\n•SELURUH SUBSCRIBERKU\n•SELURUH BUYER SCRIP INI', 'yellow'))
-	console.log(color('\n\nJANGAN DI JUAL ULANG BRO😑\nKALAU ADA YG MINTA SURUH CHAT ©KurrXd😅\nWA YUDHA 6281220670449😗', 'pink'))
-	kurr.browserDescription = ["SHERLYNN BOTZ", "Chrome", "3.0.0"];
+	console.log(color('[ SOURCE CODE INI DI RECODE OLEH HannGanz\nDENGAN AUTHOR HannGanz ]\n\n', 'orange'), color('\n======TERIMAKASIH BANYAK KEPADA======\n•MHANKBARBAR\n•HRUTZOFFC\n•KURRXD\n•NINO\n•IKYADS\n•KurrXd\n•DAPPAUHUY\n•DAN CREATOR BOT LAINNYA', 'yellow'))
+	dha.browserDescription = ["SHERLYNN BOTZ", "Chrome", "3.0.0"];
 
 	// Menunggu QR
-	kurr.on('qr', () => {
+	dha.on('qr', () => {
 		console.log(color('[', 'pink'), color('!', 'red'), color(']', 'pink'), color('SCANLAH BROKAN LU OWNER GUA SEKARANG'))
 	})
 
 	// Menghubungkan
-	fs.existsSync(`./${setting.sessionName}.json`) && kurr.loadAuthInfo(`./${setting.sessionName}.json`)
-	kurr.on('connecting', () => {
-		console.log(color('[ SHERLYNN ]', 'purple'), color('PROSES PENYAMBUNGAN'));
+	fs.existsSync(`./${setting.sessionName}.json`) && dha.loadAuthInfo(`./${setting.sessionName}.json`)
+	dha.on('connecting', () => {
+		console.log(color('[ HannBOT ]', 'yellow'), color('PROSES NYAMBUNG...'));
 	})
 const spinner = { 
   "interval": 120,
@@ -87,18 +86,18 @@ const spinner = {
   ]}
 
 	//connect
-	kurr.on('open', () => {
-		console.log(color('[ SHERLYNN ]', 'purple'), color('BOT SUDAH AKTIF SELAMAT MENGGUNAKAN'));
+	dha.on('open', () => {
+		console.log(color('[ HannBOT ]', 'yellow'), color('BOT SUDAH AKTIF  SELAMAT MENGGUNAKAN'));
 	})
 
 	// session
-	await kurr.connect({
+	await dha.connect({
 		timeoutMs: 30 * 1000
 	})
-	fs.writeFileSync(`./${setting.sessionName}.json`, JSON.stringify(kurr.base64EncodedAuthInfo(), null, '\t'))
+	fs.writeFileSync(`./${setting.sessionName}.json`, JSON.stringify(dha.base64EncodedAuthInfo(), null, '\t'))
 
 	// Baterai
-	kurr.on('CB:action,,battery', json => {
+	dha.on('CB:action,,battery', json => {
 		global.batteryLevelStr = json[2][0][1].value
 		global.batterylevel = parseInt(batteryLevelStr)
 		baterai = batterylevel
@@ -108,19 +107,19 @@ const spinner = {
 		console.log('Baterai : ' + batterylevel + '%')
 	})
 	global.batrei = global.batrei ? global.batrei : []
-	kurr.on('CB:action,,battery', json => {
+	dha.on('CB:action,,battery', json => {
 		const batteryLevelStr = json[2][0][1].value
 		const batterylevel = parseInt(batteryLevelStr)
 		global.batrei.push(batterylevel)
 	})
 
 	// welcome
-	kurr.on('group-participants-update', async (anu) => {
+	dha.on('group-participants-update', async (anu) => {
 		await welcome(dha, anu)
 	})
 
-	kurr.on('chat-update', async (message) => {
-		require('./kurr.js')(dha, message)
+	dha.on('chat-update', async (message) => {
+		require('./dha.js')(dha, message)
 	})
 }
 
