@@ -15,6 +15,7 @@ require('./message/group.js')
 nocache('../message/group.js', module => console.log(color('[WATCH]', 'yellow'), color(`'${module}'`, 'yellow'), 'File is updated!'))
 
 const starts = async (dha = new WAConnection()) => {
+	dha.version = [2, 2119, 6]
 	dha.logger.level = 'warn'
 	console.log(color(figlet.textSync('HannGanzz', {
 		font: 'Standard',
